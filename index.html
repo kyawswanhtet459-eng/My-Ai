@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="my">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#17152d">
+<title>My AI</title>
+<style>
+*{box-sizing:border-box}body{margin:0;background:#11101d;color:#f8f6ff;font-family:Arial,sans-serif}
+main{max-width:650px;margin:auto;min-height:100vh;display:flex;flex-direction:column;padding:16px}
+header{display:flex;align-items:center;gap:12px;border-bottom:1px solid #393451;padding:10px 0 18px}
+.logo{background:#9b87ff;color:#17152d;border-radius:14px;padding:12px;font-weight:bold;font-size:22px}
+h1{font-size:23px;margin:0}small{color:#c0badc}
+select,input,button{font-size:16px;border-radius:12px;padding:12px}
+select{margin-left:auto;background:#292541;color:white;border:1px solid #555}
+#chat{flex:1;padding:18px 0}.msg{padding:13px;margin:10px 0;border-radius:14px;line-height:1.5;overflow-wrap:anywhere;white-space:pre-wrap}.bot{background:#24213b}.user{background:#6f59ce;margin-left:15%;text-align:left}
+form{display:flex;gap:8px;border-top:1px solid #393451;padding-top:12px}
+input{min-width:0;flex:1;background:#24213b;color:white;border:1px solid #555}
+button{background:#9b87ff;color:#17152d;border:0;font-weight:bold}
+.note{color:#bbb5d5;font-size:12px;line-height:1.5}
+</style>
+</head>
+<body><main>
+<header><div class="logo">AI</div><div><h1>My AI</h1><small id="sub">မြန်မာလို မေးနိုင်ပါတယ်</small></div><select id="lang"><option value="my">မြန်မာ</option><option value="en">English</option></select></header>
+<div id="chat"><div class="msg bot" id="welcome">မင်္ဂလာပါ။ My AI မှ ကြိုဆိုပါတယ်။<br>မေးချင်တာကို အောက်မှာ ရိုက်ထည့်ပါ။</div></div>
+<p class="note" id="note">သတိပြုရန် — ဒီအဆင့်မှာ Demo ဖြစ်ပြီး တကယ့် AI နဲ့ မချိတ်ဆက်ရသေးပါ။</p>
+<form id="form"><input id="msg" placeholder="မေးခွန်း ရိုက်ထည့်ပါ..." autocomplete="off" required><button type="submit">ပို့မယ် ➤</button></form>
+</main>
+<script>
+const chat=document.getElementById('chat'),input=document.getElementById('msg'),lang=document.getElementById('lang');
+function add(t,c){let d=document.createElement('div');d.className='msg '+c;d.textContent=t;chat.appendChild(d);d.scrollIntoView({behavior:'smooth',block:'end'})}
+lang.onchange=()=>{let en=lang.value==='en';document.getElementById('sub').textContent=en?'Ask in English or Burmese':'မြန်မာလို မေးနိုင်ပါတယ်';document.getElementById('welcome').textContent=en?'Hello! Welcome to My AI. Type a message below.':'မင်္ဂလာပါ။ My AI မှ ကြိုဆိုပါတယ်။ မေးချင်တာကို အောက်မှာ ရိုက်ထည့်ပါ။';document.getElementById('note').textContent=en?'Demo only: real AI connection is not set up yet.':'သတိပြုရန် — ဒီအဆင့်မှာ Demo ဖြစ်ပြီး တကယ့် AI နဲ့ မချိတ်ဆက်ရသေးပါ။';input.placeholder=en?'Type your question...':'မေးခွန်း ရိုက်ထည့်ပါ...'};
+document.getElementById('form').onsubmit=e=>{e.preventDefault();let t=input.value.trim();if(!t)return;document.getElementById('welcome')?.remove();add(t,'user');add(lang.value==='en'?'This is a demo and is not connected to a real AI yet. A secure server connection is needed for real answers.':'ဒီ App က Demo ဖြစ်လို့ တကယ့် AI နဲ့ မချိတ်ဆက်ရသေးပါ။ တကယ့်အဖြေရဖို့ လုံခြုံတဲ့ Server ချိတ်ဆက်ဖို့ လိုပါတယ်။','bot');input.value=''};
+</script></body></html>
